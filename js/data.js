@@ -32,10 +32,8 @@ const createComment = () => ({
   name: getRandomArrayElement(NAMES),
 });
 
-const generatePhotoId = createIdGenerator();
-
 const createPicture = (index) => ({
-  id: generatePhotoId,
+  id: index,
   url: `photos/${index}.jpg`,
   description: getRandomArrayElement(DESCRIPTION),
   likes: getRandomInteger(LIKES_MIN_COUNT, LIKES_MAX_COUNT),
@@ -44,7 +42,7 @@ const createPicture = (index) => ({
     createComment,
   ),
 });
-
+console.log(createPicture);
 const getPictures = () => Array.from(
   { length: PHOTO_COUNT },
   (_, pictureIndex) => createPicture(pictureIndex + 1),
