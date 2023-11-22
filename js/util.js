@@ -1,3 +1,4 @@
+// возвращает случайное число
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -5,7 +6,9 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
+//возвращает случайный элемент из массива
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+
 
 const createIdGenerator = () => {
   let lastGeneratedId = 0;

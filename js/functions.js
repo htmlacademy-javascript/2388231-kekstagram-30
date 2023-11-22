@@ -38,3 +38,28 @@ console.log(getNumbers('а я томат'));// NaN
 console.log(getNumbers(2023)); // 2023
 console.log(getNumbers(-1));// 1
 console.log(getNumbers(1.5)); // 15
+
+//Функция подсчета рабочего времени
+
+const definesWorkingTime = (start, finish, meeting, duration) => {
+
+  const arrayTime = [start, finish, meeting];
+  const timeWorkMinutes = [];
+  for (let i = 0; i < arrayTime.length; i++) {
+    const stringTime = arrayTime[i].split(':');
+    const getTime = parseInt(stringTime[0] * 60, 10) + parseInt(stringTime[1], 10);
+    timeWorkMinutes.push(getTime);
+  }
+  if (timeWorkMinutes[0] <= timeWorkMinutes[2] && timeWorkMinutes[2] + duration <= timeWorkMinutes[1]) {
+    return true;
+  }
+  return false;
+};
+
+console.log(definesWorkingTime('08:00', '17:30', '14:00', 90)); // true
+console.log(definesWorkingTime('8:0', '10:0', '8:0', 120)); // true
+console.log(definesWorkingTime('08:00', '14:30', '14:00', 90)); // false
+console.log(definesWorkingTime('14:00', '17:30', '08:0', 90)); // false
+console.log(definesWorkingTime('8:00', '17:30', '08:00', 900)); // false
+
+
