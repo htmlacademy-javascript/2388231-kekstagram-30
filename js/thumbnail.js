@@ -1,9 +1,8 @@
-
 const thumbnailPhoto = document
   .querySelector('#picture')
   .content
   .querySelector('.picture');
-// Заполняет шаблон данными
+// Заполняет шаблон с изображениями данными
 const createThumbnail = ({ url, comments, description, likes, id }) => {
   const thumbnail = thumbnailPhoto.cloneNode(true);
 
@@ -20,6 +19,7 @@ const renderThumbnail = (pictures, containerPhoto) => {
   const fragment = document.createDocumentFragment();
   pictures.forEach((picture) => {
     const thumbnail = createThumbnail(picture);
+
     fragment.append(thumbnail);
   });
   containerPhoto.append(fragment);

@@ -1,9 +1,9 @@
-import { renderThumbnail } from "./thumbnail.js";
-import { showPicture } from "./picture.js";
+import { renderThumbnail } from './thumbnail.js';
+import { showPicture } from './picture.js';
 
 const containerPhoto = document.querySelector('.pictures');
 
-
+// Отображает галерею при клике на фотографию
 const renderGallery = (pictures) =>{
   containerPhoto.addEventListener('click', (evt) =>{
     const thumbnail = evt.target.closest('[data-picture-id]');

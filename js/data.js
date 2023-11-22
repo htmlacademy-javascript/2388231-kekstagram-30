@@ -42,7 +42,7 @@ const createPicture = (index) => ({
     createComment,
   ),
 });
-console.log(createPicture);
+
 const getPictures = () => Array.from(
   { length: PHOTO_COUNT },
   (_, pictureIndex) => createPicture(pictureIndex + 1),
