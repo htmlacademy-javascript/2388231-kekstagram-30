@@ -9,14 +9,14 @@ const commentList = bigPictureElement.querySelector('.social__comments');
 const commentCountElement = bigPictureElement.querySelector('.social__comment-shown-count');
 const totalCommentCountElement = bigPictureElement.querySelector('.social__comment-total-count');
 const commentLoader = bigPictureElement.querySelector('.comments-loader');
-
+const likesNumber = document.querySelector('.likes-count');
 const commentElement = document.querySelector('#comment').content.querySelector('.social__comment');
 
 let commentsCountShow = 0;
 let comments = [];
 
 // Заполняет шаблон с комментариями данными
-const createComment = ({avatar, message, name}) => {
+const createComment = ({ avatar, message, name }) => {
   const newComment = commentElement.cloneNode(true);
 
   newComment.querySelector('.social__picture').src = avatar;
@@ -30,7 +30,7 @@ const createComment = ({avatar, message, name}) => {
 const renderComments = () => {
   commentsCountShow += COMMENTS_COUNT_SHOW;
 
-  if(commentsCountShow >= comments.length) {
+  if (commentsCountShow >= comments.length) {
     commentLoader.classList.add('hidden');
     commentsCountShow = comments.length;
   } else {
@@ -38,7 +38,7 @@ const renderComments = () => {
   }
 
   const fragment = document.createDocumentFragment();
-  for(let i = 0; i < commentsCountShow; i++){
+  for (let i = 0; i < commentsCountShow; i++) {
     const comment = createComment(comments[i]);
     fragment.append(comment);
   }
@@ -55,31 +55,46 @@ const renderComments = () => {
 const onCommentsLoaderClick = () => renderComments();
 
 // Функция закрывающая модальное окно с фотографиями
-const hidePicture = () =>{
+const hidePicture = () => {
   commentsCountShow = 0;
   bigPictureElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
-const onClosePicture = () =>{
+const onClosePicture = () => {
   hidePicture();
 };
 
 // Обработчик на закрытие окна кнопкой
 function onDocumentKeydown(evt) {
-  if(evt.key === 'Escape' || evt.key === 'Backspace') {
+  if (evt.key === 'Escape' || evt.key === 'Backspace') {
     evt.preventDefault();
     hidePicture();
   }
 }
 
 // Заполнят модальное окно галлереи данными
-const renderPicture = ({url, description, likes}) => {
+const renderPicture = ({ url, description, likes }) => {
   bigPictureElement.querySelector('.big-picture__img img').src = url;
   bigPictureElement.querySelector('.big-picture__img img').alt = description;
   bigPictureElement.querySelector('.likes-count').textContent = likes;
   bigPictureElement.querySelector('.social__caption').textContent = description;
+};
+
+// Функция отображает поставленный лайк
+const initLikes = () => {
+  likesNumber.addEventListener('click', () => {
+    if (likesNumber.classList.contains('likes-count--active')) {
+      likesNumber.textContent--;
+      likesNumber.classList.remove('likes-count--active');
+    } else {
+      likesNumber.textContent++;
+      likesNumber.classList.add('likes-count--active');
+    }
+  });
+
+
 };
 
 // Отображает модальное окно с заполнеными данными
@@ -90,7 +105,7 @@ const showPicture = (pictureBigData) => {
 
   comments = pictureBigData.comments;
   renderComments();
-
+  initLikes();
   renderPicture(pictureBigData);
 };
 
@@ -100,4 +115,4 @@ closePictureButton.addEventListener('click', onClosePicture);
 //Обработчик на кнопку загрузки комментария
 commentLoader.addEventListener('click', onCommentsLoaderClick);
 
-export {showPicture};
+export { showPicture };
