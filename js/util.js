@@ -1,22 +1,19 @@
-// возвращает случайное число
-const getRandomInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
+const DELETE_MESSAGE_TIMEOUT = 5000;
+
+const errorMessageTemplate = document
+  .querySelector('#data-error')
+  .content
+  .querySelector('.data-error');
+
+const showErrorMessage = () => {
+  const errorElement = errorMessageTemplate.cloneNode(true);
+  document.body.append(errorElement);
+
+  setTimeout(() => {
+    errorElement.remove();
+  }, DELETE_MESSAGE_TIMEOUT);
 };
 
-//возвращает случайный элемент из массива
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
-
-const createIdGenerator = () => {
-  let lastGeneratedId = 0;
-
-  return () => {
-    lastGeneratedId += 1;
-    return lastGeneratedId;
-  };
-};
-
-export { getRandomInteger, getRandomArrayElement, createIdGenerator, };
+export { showErrorMessage, isEscapeKey };
