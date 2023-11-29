@@ -1,8 +1,11 @@
+
 import { resetScale } from './scale.js';
 import { init as initEffect, reset as resetEffect } from './effects.js';
 import { sendPictures } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
 import { isEscapeKey } from './util.js';
+
+/* eslint-disable no-use-before-define */
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;

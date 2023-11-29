@@ -2,6 +2,7 @@ const thumbnailPhoto = document
   .querySelector('#picture')
   .content
   .querySelector('.picture');
+
 // Заполняет шаблон с изображениями данными
 const createThumbnail = ({ url, comments, description, likes, id }) => {
   const thumbnail = thumbnailPhoto.cloneNode(true);
@@ -10,7 +11,7 @@ const createThumbnail = ({ url, comments, description, likes, id }) => {
   thumbnail.querySelector('.picture__img').alt = description;
   thumbnail.querySelector('.picture__comments').textContent = comments.length;
   thumbnail.querySelector('.picture__likes').textContent = likes;
-  thumbnail.dataset.pictureId = id;
+  thumbnail.dataset.thumbnailId = id;
   return thumbnail;
 };
 

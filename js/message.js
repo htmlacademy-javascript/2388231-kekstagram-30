@@ -1,5 +1,5 @@
 import { isEscapeKey } from './util.js';
-
+/* eslint-disable no-use-before-define */
 const successMessageElement = document
   .querySelector('#success')
   .content

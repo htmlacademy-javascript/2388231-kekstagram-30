@@ -9,7 +9,6 @@ const commentList = bigPictureElement.querySelector('.social__comments');
 const commentCountElement = bigPictureElement.querySelector('.social__comment-shown-count');
 const totalCommentCountElement = bigPictureElement.querySelector('.social__comment-total-count');
 const commentLoader = bigPictureElement.querySelector('.comments-loader');
-const likesNumber = document.querySelector('.likes-count');
 const commentElement = document.querySelector('#comment').content.querySelector('.social__comment');
 
 let commentsCountShow = 0;
@@ -82,21 +81,6 @@ const renderPicture = ({ url, description, likes }) => {
   bigPictureElement.querySelector('.social__caption').textContent = description;
 };
 
-// Функция отображает поставленный лайк
-const initLikes = () => {
-  likesNumber.addEventListener('click', () => {
-    if (likesNumber.classList.contains('likes-count--active')) {
-      likesNumber.textContent--;
-      likesNumber.classList.remove('likes-count--active');
-    } else {
-      likesNumber.textContent++;
-      likesNumber.classList.add('likes-count--active');
-    }
-  });
-
-
-};
-
 // Отображает модальное окно с заполнеными данными
 const showPicture = (pictureBigData) => {
   bigPictureElement.classList.remove('hidden');
@@ -105,7 +89,6 @@ const showPicture = (pictureBigData) => {
 
   comments = pictureBigData.comments;
   renderComments();
-  initLikes();
   renderPicture(pictureBigData);
 };
 
