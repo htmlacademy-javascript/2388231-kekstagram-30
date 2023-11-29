@@ -1,24 +1,33 @@
 import { renderThumbnail } from './thumbnail.js';
-import { showPicture } from './picture.js';
+import { showPicture } from './picture.js'; // Предполагается, что showPicture - это функция в picture.js
 
-const containerPhoto = document.querySelector('.pictures');
+const container = document.querySelector('.pictures');
+let pictures = []; // Предположим, что у вас есть переменная, содержащая изображения
 
-// Отображает галерею при клике на фотографию
-const renderGallery = (pictures) =>{
-  containerPhoto.addEventListener('click', (evt) =>{
-    const thumbnail = evt.target.closest('[data-picture-id]');
+const handleThumbnailClick = (evt) => {
+  const thumbnail = evt.target.closest('[data-thumbnail-id]');
+  if (!thumbnail) {
+    return;
+  }
+  evt.preventDefault();
 
-    if(!thumbnail){
-      return;
-    }
-
-    evt.preventDefault();
-    const pictureId = +thumbnail.dataset.pictureId;
-    const pictureData = pictures.find(({id}) => id === pictureId);
-    showPicture(pictureData);
-  });
-
-  renderThumbnail(pictures, containerPhoto);
+  const thumbnailId = +thumbnail.dataset.thumbnailId;
+  const pictureData = pictures.find(({ id }) => id === thumbnailId);
+  showPicture(pictureData);
 };
 
-export{renderGallery};
+const renderGallery = (newPictures) => {
+  if (!container) {
+    return;
+  }
+
+  container.removeEventListener('click', handleThumbnailClick);
+
+  pictures = newPictures;
+
+  renderThumbnail(pictures, container);
+
+  container.addEventListener('click', handleThumbnailClick);
+};
+
+export { renderGallery };

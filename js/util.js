@@ -16,4 +16,21 @@ const showErrorMessage = () => {
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export { showErrorMessage, isEscapeKey };
+const getRandomIndex = (min, max) => {
+  const minRange = Math.ceil(Math.min(min, max));
+  const maxRange = Math.floor(Math.max(min, max));
+  const randomNumber = Math.floor(Math.random() * (maxRange - minRange + 1) + minRange);
+
+  return randomNumber;
+};
+
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export { showErrorMessage, isEscapeKey, debounce, getRandomIndex };
