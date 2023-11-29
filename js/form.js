@@ -9,6 +9,7 @@ import { isEscapeKey } from './util.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 const textError = {
   INVALID_COUNT: `Количество введенных хэштегов должно быть не больше ${MAX_HASHTAG_COUNT}.`,
   NOT_UNIQUE: 'Хэштеги не могут повторяться',
@@ -28,6 +29,8 @@ const fileUploadField = formUpload.querySelector('.img-upload__input');
 const hashtagsField = formUpload.querySelector('.text__hashtags');
 const commentsField = formUpload.querySelector('.text__description');
 const submitButton = formUpload.querySelector('.img-upload__submit');
+const photoPreview = document.querySelector('.img-upload__preview img');
+const effectsPreview = document.querySelectorAll('.effects__preview');
 
 
 const toggleSubmitButton = (isDisabled) => {
@@ -65,6 +68,13 @@ const isTextFieldFocused = () =>
   document.activeElement === hashtagsField ||
   document.activeElement === commentsField;
 
+const isValidType = (file) => {
+  const fileName = file.name.toLowerCase();
+  const fileExtension = FILE_TYPES.map((type) => type.toLowerCase());
+
+  return fileExtension.includes(fileName.split('.').pop());
+};
+
 const normalizeTags = (tagString) => tagString
   .trim()
   .split(' ')
@@ -93,6 +103,14 @@ const onCloseButtonClick = () => {
 };
 
 const onFileInputChange = () => {
+  const file = fileUploadField.files[0];
+
+  if (file && isValidType(file)) {
+    photoPreview.src = URL.createObjectURL(file);
+    effectsPreview.forEach((preview) => {
+      preview.style.backgroundImage = `url('${photoPreview.src}')`;
+    });
+  }
   openModalForm();
 };
 
