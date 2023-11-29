@@ -1,4 +1,4 @@
-// Константа с количеством отрисованных комметариев
+import { isEscapeKey } from './util.js';
 const COMMENTS_COUNT_SHOW = 5;
 
 const bigPictureElement = document.querySelector('.big-picture');
@@ -67,7 +67,7 @@ const onClosePicture = () => {
 
 // Обработчик на закрытие окна кнопкой
 function onDocumentKeydown(evt) {
-  if (evt.key === 'Escape' || evt.key === 'Backspace') {
+  if (isEscapeKey(evt)) {
     evt.preventDefault();
     hidePicture();
   }

@@ -1,9 +1,6 @@
 const DELETE_MESSAGE_TIMEOUT = 5000;
 
-const errorMessageTemplate = document
-  .querySelector('#data-error')
-  .content
-  .querySelector('.data-error');
+const errorMessageTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 
 const showErrorMessage = () => {
   const errorElement = errorMessageTemplate.cloneNode(true);
