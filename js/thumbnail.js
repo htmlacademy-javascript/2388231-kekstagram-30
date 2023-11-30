@@ -6,12 +6,17 @@ const thumbnailPhoto = document
 // Заполняет шаблон с изображениями данными
 const createThumbnail = ({ url, comments, description, likes, id }) => {
   const thumbnail = thumbnailPhoto.cloneNode(true);
-
-  thumbnail.querySelector('.picture__img').src = url;
-  thumbnail.querySelector('.picture__img').alt = description;
-  thumbnail.querySelector('.picture__comments').textContent = comments.length;
-  thumbnail.querySelector('.picture__likes').textContent = likes;
   thumbnail.dataset.thumbnailId = id;
+
+  const thumbnailImage = thumbnail.querySelector('.picture__img');
+  const thumbnailComment = thumbnail.querySelector('.picture__comments');
+  const thumbnailLike = thumbnail.querySelector('.picture__likes');
+
+  thumbnailImage.src = url;
+  thumbnailImage.alt = description;
+  thumbnailComment.textContent = comments.length;
+  thumbnailLike.textContent = likes;
+
   return thumbnail;
 };
 
@@ -27,4 +32,4 @@ const renderThumbnail = (pictures, containerPhoto) => {
 };
 
 
-export { renderThumbnail};
+export { renderThumbnail };

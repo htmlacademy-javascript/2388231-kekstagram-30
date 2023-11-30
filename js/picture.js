@@ -4,7 +4,9 @@ const COMMENTS_COUNT_SHOW = 5;
 const bigPictureElement = document.querySelector('.big-picture');
 const bodyElement = document.querySelector('body');
 const closePictureButton = bigPictureElement.querySelector('.big-picture__cancel');
-
+const fullImage = bigPictureElement.querySelector('.big-picture__img img');
+const commentsCount = bigPictureElement.querySelector('.likes-count');
+const pictureDescription = bigPictureElement.querySelector('.social__caption');
 const commentList = bigPictureElement.querySelector('.social__comments');
 const commentCountElement = bigPictureElement.querySelector('.social__comment-shown-count');
 const totalCommentCountElement = bigPictureElement.querySelector('.social__comment-total-count');
@@ -18,9 +20,12 @@ let comments = [];
 const createComment = ({ avatar, message, name }) => {
   const newComment = commentElement.cloneNode(true);
 
-  newComment.querySelector('.social__picture').src = avatar;
-  newComment.querySelector('.social__picture').alt = name;
-  newComment.querySelector('.social__text').textContent = message;
+  const commentPicture = newComment.querySelector('.social__picture');
+  const commentText = newComment.querySelector('.social__text');
+
+  commentPicture.src = avatar;
+  commentPicture.alt = name;
+  commentText.textContent = message;
 
   return newComment;
 };
@@ -75,10 +80,10 @@ function onDocumentKeydown(evt) {
 
 // Заполнят модальное окно галлереи данными
 const renderPicture = ({ url, description, likes }) => {
-  bigPictureElement.querySelector('.big-picture__img img').src = url;
-  bigPictureElement.querySelector('.big-picture__img img').alt = description;
-  bigPictureElement.querySelector('.likes-count').textContent = likes;
-  bigPictureElement.querySelector('.social__caption').textContent = description;
+  fullImage.src = url;
+  fullImage.alt = description;
+  commentsCount.textContent = likes;
+  pictureDescription.textContent = description;
 };
 
 // Отображает модальное окно с заполнеными данными

@@ -4,7 +4,7 @@ import { showPicture } from './picture.js'; // Предполагается, ч�
 const container = document.querySelector('.pictures');
 let pictures = []; // Предположим, что у вас есть переменная, содержащая изображения
 
-const handleThumbnailClick = (evt) => {
+const onThumbnailClick = (evt) => {
   const thumbnail = evt.target.closest('[data-thumbnail-id]');
   if (!thumbnail) {
     return;
@@ -21,13 +21,13 @@ const renderGallery = (newPictures) => {
     return;
   }
 
-  container.removeEventListener('click', handleThumbnailClick);
+  container.removeEventListener('click', onThumbnailClick);
 
   pictures = newPictures;
 
   renderThumbnail(pictures, container);
 
-  container.addEventListener('click', handleThumbnailClick);
+  container.addEventListener('click', onThumbnailClick);
 };
 
 export { renderGallery };
